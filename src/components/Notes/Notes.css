@@ -1,0 +1,17 @@
+.notes-area {
+
+    background-color: rgb(240, 245, 244);
+}
+
+.total-area {
+    width: 1200px;
+    padding: 50px;
+
+}
+
+.sub-area {
+    padding: 50px;
+    height: 500px;
+    background-color: rgb(216, 242, 239);
+
+}

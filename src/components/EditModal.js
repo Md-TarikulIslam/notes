@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaEdit } from "react-icons/fa";
 const EditModal = ({ data, notes, editId, setNotes, setEditId }) => {
   const editHandler = (id) => {
     setEditId(id);
@@ -21,7 +21,7 @@ const EditModal = ({ data, notes, editId, setNotes, setEditId }) => {
         return item;
       }
     });
-    console.log(updateNotes)
+    console.log(updateNotes);
     setNotes(updateNotes);
   };
   return (
@@ -34,33 +34,48 @@ const EditModal = ({ data, notes, editId, setNotes, setEditId }) => {
         }}
       >
         {" "}
-        <button
-          className="btn"
+        <FaEdit
           onClick={() => window.my_modal_3.showModal(data.id)}
-        >
-          edit
-        </button>
+          className="text-2xl"
+        ></FaEdit>
       </p>
       <dialog id="my_modal_3" className="modal">
         <form method="dialog" className="modal-box">
-          <h3 className="font-bold text-lg">Update</h3>
-          <input
-            name="type"
-            id="editType"
-            type="text"
-            placeholder="Type here"
-            className="input input-bordered w-full max-w-xs"
-          />
-          <input
-            name="desc"
-            id="editDesc"
-            type="text"
-            placeholder="Desc here"
-            className="input input-bordered w-full max-w-xs"
-          />
-          <button onClick={updateHandler} type="submit" className="btn">
-            Submit
-          </button>
+          <h3 className="font-bold text-lg text-blue-600 text-left">
+            Edit Ticket Type
+          </h3>
+          <div className="flex items-center gap-5 my-5">
+            <p>Ticket Type</p>
+            <input
+              name="type"
+              id="editType"
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="flex items-center gap-5">
+            <p>Description</p>
+            <input
+              name="desc"
+              id="editDesc"
+              type="text"
+              placeholder="Desc here"
+              className="input input-bordered w-full max-w-xs"
+            />
+          </div>
+          <div className="flex items-center gap-5 ml-44">
+            <div className="modal-action">
+              <button className="btn">Close</button>
+            </div>
+            <button
+              onClick={updateHandler}
+              type="submit"
+              className="btn bg-blue-600 text-white mt-6"
+            >
+              Add ticket type
+            </button>
+          </div>
         </form>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

@@ -1,17 +1,18 @@
 import React from "react";
+import './SideNav.css'
 
 const Sidenav = () => {
   return (
     <div>
-      <ul className="menu bg-base-200 w-56 rounded-box">
+      <ul className="menu nav bg-blue-700 text-white rounded-box">
         <li>
-          <a>Item 1</a>
+          <a>Dashboard</a>
         </li>
         <li>
-          <a>Item 2</a>
+          <a>My Tickets</a>
         </li>
         <li>
-          <a>Item 3</a>
+          <a>My Profile</a>
         </li>
       </ul>
     </div>
