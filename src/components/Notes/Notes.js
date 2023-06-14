@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Modal from "../Modal";
+import EditModal from "../EditModal";
 
 const Notes = () => {
   const [type, setType] = useState("");
   const [desc, setDesc] = useState("");
   const [notes, setNotes] = useState(getNotesFromLocal);
+  const [editId, setEditId]=useState('')
 
   localStorage.setItem("notes", JSON.stringify(notes));
 
@@ -92,7 +93,7 @@ const Notes = () => {
                 <tr key={data.id}>
                   <td>{data.type}</td>
                   <td>{data.desc}</td>
-                  <Modal />
+                  <EditModal data={data} notes={notes} setNotes={setNotes} editId={editId} setEditId={setEditId}/>
                   <button onClick={()=>{removeHandler(data.id)}} className="btn">delete</button>
                 </tr>
               );
