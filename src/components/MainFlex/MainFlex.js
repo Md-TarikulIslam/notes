@@ -4,7 +4,7 @@ import Notes from "../Notes/Notes";
 
 const MainFlex = () => {
   return (
-    <div className="flex">
+    <div className="flex justify-evenly">
       <Sidenav />
       <Notes />
     </div>
