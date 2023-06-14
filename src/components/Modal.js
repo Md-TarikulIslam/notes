@@ -4,7 +4,7 @@ const Modal = () => {
   return (
     <div>
       {/* Open the modal using ID.showModal() method */}
-      <button className="btn" onClick={() => window.my_modal_3.showModal()}>
+      <button  className="btn" onClick={() => window.my_modal_3.showModal()}>
         edit
       </button>
       <dialog id="my_modal_3" className="modal">

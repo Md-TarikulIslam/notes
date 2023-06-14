@@ -4,7 +4,9 @@ import Modal from "../Modal";
 const Notes = () => {
   const [type, setType] = useState("");
   const [desc, setDesc] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(getNotesFromLocal);
+
+  localStorage.setItem("notes", JSON.stringify(notes));
 
   const inputHandler = (e) => {
     if (e.target.id === "type") {
@@ -15,18 +17,29 @@ const Notes = () => {
   };
   const addInfoHandler = (e) => {
     e.preventDefault();
-    setNotes((note) => {
-      return [
-        ...note,
-        {
-          type: type,
-          desc: desc,
-          id: Math.random(),
-        },
-      ];
-    });
+    if (type !== "" && desc !== "") {
+      setNotes((note) => {
+        return [
+          ...note,
+          {
+            type: type,
+            desc: desc,
+            id: Math.random(),
+          },
+        ];
+      });
+    }
+    setType("");
+    setDesc("");
   };
-  console.log(notes);
+  const removeHandler =(id)=>{
+   const newNotes= notes.filter((item)=>{
+        if(item.id!==id){
+            return item
+        }
+    })
+    setNotes(newNotes)
+  }
   return (
     <div>
       <div>
@@ -76,11 +89,11 @@ const Notes = () => {
           <tbody>
             {notes.map((data) => {
               return (
-                <tr>
+                <tr key={data.id}>
                   <td>{data.type}</td>
                   <td>{data.desc}</td>
                   <Modal />
-                  <td>delete</td>
+                  <button onClick={()=>{removeHandler(data.id)}} className="btn">delete</button>
                 </tr>
               );
             })}
@@ -89,6 +102,14 @@ const Notes = () => {
       </div>
     </div>
   );
+  function getNotesFromLocal() {
+    const note = JSON.parse(localStorage.getItem("notes"));
+    if (!note) {
+      setNotes([]);
+    } else {
+      return note;
+    }
+  }
 };
 
 export default Notes;
