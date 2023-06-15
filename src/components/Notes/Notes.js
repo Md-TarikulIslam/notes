@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditModal from "../EditModal";
+import EditModal from "../EditModal/EditModal";
 import "./Notes.css";
 import { FaTrash } from "react-icons/fa";
 import img from "../../assets/images/a.jpg";
@@ -20,7 +20,6 @@ const Notes = () => {
     }
   };
   const addInfoHandler = (e) => {
-    e.preventDefault();
     if (type !== "" && desc !== "") {
       setNotes((note) => {
         return [
@@ -28,7 +27,7 @@ const Notes = () => {
           {
             type: type,
             desc: desc,
-            id: Math.random(),
+            id: Math.round(Math.random() * 1000000000000000000),
           },
         ];
       });
@@ -43,10 +42,11 @@ const Notes = () => {
       }
     });
     setNotes(newNotes);
+    localStorage.setItem("notes", JSON.stringify(newNotes));
   };
   return (
     <div className="notes-area rounded-lg">
-      <div className="avatar relative left-3/4">
+      <div className="avatar left-position">
         <div className="w-20 rounded-full">
           <img src={img} alt="" />
         </div>
@@ -55,7 +55,7 @@ const Notes = () => {
         <div className="sub-area">
           {/* modal button  */}
           <button
-            className="btn relative left-3/4 mb-5 bg-blue-700 text-white hover:bg-blue-600"
+            className="btn left-position2 mb-5 bg-blue-700 text-white hover:bg-blue-600"
             onClick={() => window.my_modal_2.showModal()}
           >
             Add ticket type
@@ -132,7 +132,10 @@ const Notes = () => {
                           editId={editId}
                           setEditId={setEditId}
                         />
-                        <div className="tooltip  tooltip-error" data-tip="Are You Sure To Delete?">
+                        <div
+                          className="tooltip  tooltip-error"
+                          data-tip="Are You Sure To Delete?"
+                        >
                           <FaTrash
                             className="text-2xl"
                             data-tip="hello"
@@ -149,7 +152,7 @@ const Notes = () => {
             </table>
           </div>
           {/* pagination  */}
-          <div className="join relative left-3/4 mt-5">
+          <div className="join left-position3 mt-5">
             <button className="join-item btn">«</button>
             <button className="join-item btn">1</button>
             <button className="join-item btn">»</button>
@@ -160,10 +163,10 @@ const Notes = () => {
   );
   function getNotesFromLocal() {
     const note = JSON.parse(localStorage.getItem("notes"));
-    if (!note) {
-      setNotes([]);
-    } else {
+    if (note) {
       return note;
+    } else {
+      return [];
     }
   }
 };

@@ -23,6 +23,7 @@ const EditModal = ({ data, notes, editId, setNotes, setEditId }) => {
     });
     console.log(updateNotes);
     setNotes(updateNotes);
+    localStorage.setItem('notes', JSON.stringify(updateNotes));
   };
   return (
     <div>
